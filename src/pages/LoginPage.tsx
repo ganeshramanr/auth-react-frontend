@@ -1,8 +1,12 @@
 import { useState } from 'react';
+import {useNavigate, Link} from "react-router-dom";
+
 import './LoginPage.css';
 import axios from 'axios';
 
 function LoginPage() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -20,7 +24,7 @@ function LoginPage() {
             }
           })
           .then((res) => {
-            window.alert("Login Success");
+            navigate("/home");
           })
           .catch((err) => console.log(err));
 
@@ -49,7 +53,11 @@ function LoginPage() {
           />
         </label>
         <div>
-          <button type="submit">Submit</button>
+          <button type="submit">Login</button>
+        </div>
+        <br></br>
+        <div>
+          <Link to={`/register`}>New User Signup</Link>
         </div>
       </form>
     </div>
