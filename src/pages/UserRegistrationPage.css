@@ -1,29 +1,45 @@
-.login-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 1.5rem;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  width: 300px;
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
 }
 
 input {
-  margin: 10px 0;
-  padding: 5px;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
 }
 
-button {
-  margin-top: 10px;
-  padding: 5px;
-  background-color: #007bff;
+.signup-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #1877f2;
   color: white;
   border: none;
+  border-radius: 4px;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: #0056b3;
+.signup-button:hover {
+  background-color: #166fe5;
+}
+
+.blue-text-padding {
+  color: blue;
+  padding-bottom: 1rem;
 }

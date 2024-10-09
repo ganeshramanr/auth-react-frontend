@@ -31,34 +31,36 @@ function LoginPage() {
   };
 
   return (
-    <div className="login-wrapper">
-      <h1>Please Log In</h1>
-      <form onSubmit={handleLogin}>
-        <label>
-          <p>Email</p>
-          <input 
-            type="email" 
-            value={email} 
+    <div className="login-signup-container">
+      <form className="login-signup-form" onSubmit={handleLogin}>
+        <h2>Login</h2>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </label>
-        <label>
-          <p>Password</p>
-          <input 
-            type="password" 
-            value={password} 
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
-        <div>
-          <button type="submit">Login</button>
         </div>
-        <br></br>
-        <div>
-          <Link to={`/register`}>New User Signup</Link>
+        <div className='div-bottom-padding'>
+          <button type="submit" className="login-button">
+            Log In
+          </button>
         </div>
+        
+        <Link to={`/register`}>New User Signup</Link>
       </form>
     </div>
   );
