@@ -24,6 +24,7 @@ function LoginPage() {
             }
           })
           .then((res) => {
+            window.localStorage.setItem('user', email);
             navigate("/home");
           })
           .catch((err) => console.log(err));

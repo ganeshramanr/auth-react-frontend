@@ -1,12 +1,35 @@
-
+import {useNavigate} from "react-router-dom";
 import './Dashboard.css';
+import logo from '../assets/react.svg'; 
 
 function Dashboard() {
+  const navigate = useNavigate();
+  const user = window.localStorage.getItem('user')
+
+  const handleLogout = () => {
+    window.localStorage.removeItem('user')
+    navigate("/login");
+  }
+
   return (
     <div className="dashboard">
-      <header className="dashboard-header">
-        <h1>My Dashboard</h1>
-      </header>
+      <div className="dashboard-header">
+        {/* <span><b>My Dashboard</b></span>{user} 
+        <span onClick={handleLogout}>Logout</span> */}
+        <header className="header">
+          <div className="logo-container">
+            <img src={logo} alt="Logo" className="logo" />
+          </div>
+          <h1 className="title">My Dashboard</h1>
+          <div className="logout-container">
+            <div className="div-padding-right">Welcome {user}</div>
+            {/* <button onClick={handleLogout} className="logout-button">
+              Logout
+            </button> */}
+            <span className="logout-span" onClick={handleLogout}>Logout</span>
+          </div>
+        </header>
+      </div>
       <div className="dashboard-content">
         <aside className="sidebar">
           <nav>
