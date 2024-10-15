@@ -43,3 +43,8 @@ input {
   color: blue;
   padding-bottom: 1rem;
 }
+
+.red-text-padding {
+  color: red;
+  padding-bottom: 1rem;
+}

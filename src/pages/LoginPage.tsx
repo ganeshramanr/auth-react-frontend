@@ -1,14 +1,18 @@
 import { useState } from 'react';
 import {useNavigate, Link} from "react-router-dom";
-
-import './LoginPage.css';
 import axios from 'axios';
+import {config} from '../config'
+import './LoginPage.css';
+
+
+const LOGIN_API = config.authApiUrl + "/api/user/login"
 
 function LoginPage() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleLogin = (e: any) => {
     e.preventDefault();
@@ -16,18 +20,18 @@ function LoginPage() {
     console.log('Login attempt with:', email, password);
 
     axios
-          .post(`http://localhost:3001/api/user/login`, {
+          .post(LOGIN_API, {
             email,
-            password,
-            headers: {
-              'Access-Control-Allow-Origin': 'http://localhost:5173'
-            }
+            password
           })
-          .then((res) => {
+          .then(() => {
             window.localStorage.setItem('user', email);
             navigate("/home");
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            setError(err.response.data.error);
+            console.log(err.response.data.error);
+          });
 
   };
 
@@ -60,6 +64,10 @@ function LoginPage() {
             Log In
           </button>
         </div>
+        { error ? 
+          <div className='red-text-padding'>{error}</div>  
+          : null
+        }
         
         <Link to={`/register`}>New User Signup</Link>
       </form>

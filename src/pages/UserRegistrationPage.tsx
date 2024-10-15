@@ -1,92 +1,50 @@
 import { useState } from 'react';
 import {Link} from "react-router-dom";
-
-import './UserRegistrationPage.css';
 import axios from 'axios';
+import {config} from '../config'
+import './UserRegistrationPage.css';
+
+const REGISTER_API = config.authApiUrl + "/api/user/register"
 
 function LoginPage() {
+
+  
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fname, setFName] = useState('');
   const [lname, setLName] = useState('');
   const [signup, setSignup] = useState(false);
+  const [error, setError] = useState('');
+
+  const resetFields = () => {
+    setEmail('');
+    setPassword('');
+    setFName('');
+    setLName('');
+  }
 
   const registerUser = (e: any) => {
     e.preventDefault();
     axios
-          .post(`http://localhost:3001/api/user/register`, {
+          .post(REGISTER_API, {
             email,
             password,
             firstname: fname,
-            lastname: lname,
-            headers: {
-              'Access-Control-Allow-Origin': 'http://localhost:5173'
-            }
+            lastname: lname
           })
-          .then((res) => {
+          .then(() => {
+            resetFields();
             setSignup(true);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            setError(err.response.data.error);
+            console.log(err.response.data.error);
+          });
 
   };
 
   return (
-    // <div className="login-wrapper">
-    //   <h1>New User Registration</h1>
-    //   <form onSubmit={registerUser}>
-    //     <label>
-    //       <p>Email</p>
-    //       <input 
-    //         type="email" 
-    //         value={email} 
-    //         onChange={(e) => setEmail(e.target.value)}
-    //         required
-    //       />
-    //     </label>
-    //     <label>
-    //       <p>Password</p>
-    //       <input 
-    //         type="password" 
-    //         value={password} 
-    //         onChange={(e) => setPassword(e.target.value)}
-    //         required
-    //       />
-    //     </label>
-    //     <label>
-    //       <p>First Name</p>
-    //       <input 
-    //         type="text" 
-    //         value={fname} 
-    //         onChange={(e) => setFName(e.target.value)}
-    //         required
-    //       />
-    //     </label>
-    //     <label>
-    //       <p>Last Name</p>
-    //       <input 
-    //         type="text" 
-    //         value={lname} 
-    //         onChange={(e) => setLName(e.target.value)}
-    //         required
-    //       />
-    //     </label>
-    //     <div>
-    //       <button type="submit">Sign Up</button>
-    //     </div>
-
-    //     { signup ? 
-    //       <div>
-    //         <br></br>
-    //         <div>User Registered Successfully.</div>
-    //         <Link to={`/`}>Go to Login Page</Link>
-    //       </div>
-    //       : null
-    //     }
-        
-    //   </form>
-    // </div>
-
     <div className="login-signup-container">
     <form className="login-signup-form" onSubmit={registerUser}>
       <h2>New User Registration</h2>
@@ -142,6 +100,11 @@ function LoginPage() {
 
       { signup ? 
           <div className='blue-text-padding'>User Registered Successfully.</div>  
+          : null
+        }
+
+      { error ? 
+          <div className='red-text-padding'>{error}</div>  
           : null
         }
         <Link to={`/`}>Go to Login Page</Link>
