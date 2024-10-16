@@ -26,6 +26,11 @@ function LoginPage() {
 
   const registerUser = (e: any) => {
     e.preventDefault();
+
+    // Clear signup and error message before submitting the request
+    setError('');
+    setSignup(false);
+
     axios
           .post(REGISTER_API, {
             email,
@@ -38,8 +43,8 @@ function LoginPage() {
             setSignup(true);
           })
           .catch((err) => {
+            console.log(err);
             setError(err.response.data.error);
-            console.log(err.response.data.error);
           });
 
   };

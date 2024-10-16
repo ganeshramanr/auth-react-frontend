@@ -29,8 +29,8 @@ function LoginPage() {
             navigate("/home");
           })
           .catch((err) => {
+            console.log(err);
             setError(err.response.data.error);
-            console.log(err.response.data.error);
           });
 
   };
