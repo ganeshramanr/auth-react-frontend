@@ -5,7 +5,7 @@ import {config} from '../config'
 import './LoginPage.css';
 
 
-const LOGIN_API = config.authApiUrl + "/api/user/login"
+const LOGIN_API = config.authApiUrl + "/api/login"
 
 function LoginPage() {
   const navigate = useNavigate();

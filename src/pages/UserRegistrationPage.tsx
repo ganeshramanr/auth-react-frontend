@@ -4,7 +4,7 @@ import axios from 'axios';
 import {config} from '../config'
 import './UserRegistrationPage.css';
 
-const REGISTER_API = config.authApiUrl + "/api/user/register"
+const REGISTER_API = config.authApiUrl + "/api/register"
 
 function LoginPage() {
 
